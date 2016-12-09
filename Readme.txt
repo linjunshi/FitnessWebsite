@@ -1,7 +1,3 @@
-CS4920 Management and Ethics
-
-Supervisor: 	Bruno Gaeta
-
 Team members: 	Pu Lin(Edward) 	 Yixuan Li(Egbert)	Yuan Ren(Martin)
 					John Wang		Qianrui Zhao(Cherry)
 
