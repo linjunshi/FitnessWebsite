@@ -1,0 +1,144 @@
+{% extends "common.html" %}
+{% block content %}
+
+<div class="form">
+
+      <ul class="tab-group  under-navbar" id="signinup">
+        <li class="tab active"><a href="#signup">Sign Up</a></li>
+        <li class="tab"><a href="#login">Log In</a></li>
+
+      <!-- the reason why we don't need the onload is because we do the checking before the data being submitted-->
+        <!-- <li class="tab active"><a href="#signup" role="tab" data-toggle="signup">Sign Up</a></li>
+        <li class="tab"><a href="#login" role="tab" data-toggle="login">Log In</a></li> -->
+        <!--<li class="tab"><a href="#forgotPassword">Forgot Password?</a></li>-->
+      </ul>
+
+      <div class="tab-content">
+
+        <div role="tabpanel" class="tab-pane active" id="signup">
+          <h1>Sign Up for Free</h1>
+          <h4 id="signup_error">Your Email Has Been Registered</h4>
+
+          <form id="signup_form" action="" method="post" onsubmit="return check_sign_up();">
+          <!-- the reason why we don't need the onload is because we do the checking before the data being submitted-->
+          <!-- <form id="signup_form" action="" method="post" onsubmit="return check_sign_up();" onload="changeTab(window.location.hash);"> -->
+
+          {% csrf_token %}
+          <!-- <div class="top-row">
+            <div class="field-wrap">
+              <label>
+                First Name<span class="req">*</span>
+              </label>
+              <input type="text" required autocomplete="off" name="firstName"/>
+            </div>
+            <div class="field-wrap">
+              <label>
+                Last Name<span class="req">*</span>
+              </label>
+              <input type="text"required autocomplete="off" name="lastName" />
+            </div>
+          </div> -->
+
+          <div class="field-wrap">
+            <label class="signInUp">
+              Email Address<span class="req">*</span>
+            </label>
+            <input class='signInUp' type="email" required autocomplete="off" name="signupEmail" />
+          </div>
+
+          <div class="field-wrap">
+            <label class="signInUp">
+              User Name<span class="req">*</span>
+            </label>
+            <input class='signInUp' type="text" required autocomplete="off" name="signupUserName" />
+          </div>
+
+          <div class="field-wrap">
+            <label class="signInUp">
+              Set A Password<span class="req">*</span>
+            </label>
+            <!-- password is at least 4 chars -->
+            <input class='signInUp' type="password" pattern=".{4,}" title="Minimum 4 characters required"
+                    required autocomplete="off" name="signupPassword" />
+          </div>
+
+          <button type="submit" class="button button-block"/>Get Started</button>
+
+          </form>
+
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="login">
+          <h1>Welcome Back!</h1>
+          <h4 id="login_error">Your Email or Password are incorrect</h4>
+          <h4 id="verified_error">Your email is not verified yet.</h4>
+
+          <form id="signin_form" action="" method="post" onsubmit="return check_login_info();">
+          {% csrf_token %}
+            <div class="field-wrap">
+            <label class="signInUp">
+              Email Address<span class="req">*</span>
+            </label>
+            <input class='signInUp' type="email" required autocomplete="off" name="loginEmail" />
+          </div>
+
+          <div class="field-wrap">
+            <label class="signInUp">
+              Password<span class="req">*</span>
+            </label>
+            <input class='signInUp' type="password"required autocomplete="off" name="loginPassword" />
+          </div>
+
+          <!-- <p class="forgot"><a href="#" id="forgot_password">Forgot Password?</a></p> -->
+          <ul>
+            <li class="tab"><a href="#forgotPassword" class="forgot">Forgot Password?</a></li>
+          </ul>
+
+          <button class="button button-block">Log In</button>
+          </form>
+
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="forgotPassword">
+          <h4 id="password_link">Reset password link sent.</h4>
+          <form id="password_form" method="post" onsubmit="return send_password_link();">
+          {% csrf_token %}
+           <div class="field-wrap">
+              <label class="signInUp">
+                Email address <span class="req">*</span>
+              </label>
+              <input class='signInUp' type="email" name="email" required autocomplete="off"/>
+            </div>
+
+            <button type="submit" class="button button-block">Retrieve password</button>
+          </form>
+        </div>
+
+      </div><!-- tab-content -->
+
+</div> <!-- /form -->
+
+<!-- sign in sign up css and js -->
+<script type="text/javascript" src="{{ STATIC_URL }}SignInSignUp_js/hide_show.js"></script>
+
+<!-- By Cherry 06/09/2016 -->
+<script type="text/javascript">
+
+function sendEmail() {
+
+  //var username = prompt("Enter your username(email address):", "");
+  alert("MATCH");
+}
+
+function changeTab(tab) {
+  if (tab == "#signup") {
+    $('#signinup [data-toggle="signup"]').click()
+  } else if (tab == "#login") {
+    $('#signinup [data-toggle="login"]').click()
+  }
+}
+
+</script>
+
+
+{% endblock %}

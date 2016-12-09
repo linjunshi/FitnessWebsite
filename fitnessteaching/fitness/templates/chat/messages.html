@@ -1,0 +1,42 @@
+{% load static %}
+                {% for post in messages %}
+                    {% if post.user.email == request.session.email %}
+                        <!-- style active user message -->
+                        {{post.user.email}}
+                        <li class="media" id="media-l">
+                            <div class="media-left ">
+                                <a href="#">
+                                    <img class="media-object img-thumbnail" src="{% static 'img/avatar1.jpg' %}">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">{{ post.user }}<small> (You)</small></h4>
+                                <small><i>{{ post.date }}</i></small>
+                                <p>{{ post.message }}</p>
+                            </div>
+                        </li>
+                    {% else %}
+                        <!-- style othes user's messages -->
+                        <li class="media" id="media-r">
+                            <div class="media-body text-right">
+                                <h4 class="media-heading">{{ post.user }}</h4>
+                                <small><i>{{ post.date }}</i></small>
+                                <p>{{ post.message }}</p>
+                            </div>
+                            <div class="media-right ">
+                                <a href="../profile/viewFriend/?id={{post.user.id}}">
+                                    <img class="media-object img-thumbnail" src="{% static 'img/avatar2.jpg' %}">
+                                </a>
+                            </div>
+                        </li>
+                    {% endif %}
+                {% empty %} <!-- If history of messages is empty show wellome test -->
+                    <div class="jumbotron">
+                        <h1 class="display-3">History is empty!</h1>
+                        <p class="lead">There are no new messages today? No problem, just type something and some random
+                            pokemon
+                            definitly answer you.
+                            I promise you!</p>
+                        <img src="{% static 'img/PikachuWellcome.png' %}" height="182px" width="342px">
+                    </div>
+                {% endfor %}

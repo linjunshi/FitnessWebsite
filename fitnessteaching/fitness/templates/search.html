@@ -1,0 +1,47 @@
+<!-- By Cherry 06/09/2016 -->
+{% extends "common.html" %}
+
+{% block content %}
+    <div class="container-fluid">
+      <div class="row under-navbar">
+      <h1 style="color: black; font-weight: bold">Results for "{{keyword}}"</h1>
+
+      <div class="col-sm-4 col-md-4 sidebar" style="border-right: 1px solid">
+        <h1 style="color: black; font-weight: bold">Video Results: {{video_amount}} results</h1>
+        <div class="thumbnail food">
+          <ul>
+            {% for item in searched_videos %}
+            <li><a href={{ item.link }}><span style="color: black"><font size="4">{{item.name}}</font></span></a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+
+
+      <div class="col-sm-4 col-md-4 sidebar">
+        <h1 style="color: black; font-weight: bold">User Results: {{user_amount}} results</h1>
+        <div class="thumbnail food">
+          <ul>
+            {% for item in searched_users %}
+            <li><a href="/profile/viewFriend/?id={{ item.id }}"><span style="color: black"><font size="4">{{item.username}}</font></span></a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+
+
+        <div class="col-sm-4 col-md-4 sidebar" style="border-left: 1px solid">
+          <h1 style="color: black; font-weight: bold">Food Results</h1>
+          <div class="thumbnail food">
+            <ul>
+              {% for item in result.list.item %}
+              <!-- <li><a href="/search?keyword={{keyword}}&ndbno={{item.ndbno}}"><span style="color: black"><font size="4">{{item.name}}</font></span></a></li> -->
+              <li><a href="/food/{{keyword}}/{{item.ndbno}}"><span style="color: black"><font size="4">{{item.name}}</font></span></a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}
+<!-- Modified by Martin 07/10/2017 -->

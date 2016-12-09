@@ -1,0 +1,132 @@
+/* Space out content a bit */
+body {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    background-color: #eeeeee;
+}
+
+/* Custom page header */
+.header {
+    padding-bottom: 1rem;
+    border-bottom: .05rem solid #e5e5e5;
+}
+
+/* Space out the masthead */
+.header {
+    margin-bottom: 2rem;
+}
+
+.pre-scrollable {
+    padding-left: 42px;
+    padding-right: 42px;
+    max-height: 30rem;
+}
+
+#signin-body {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #eee;
+    background-image: url('http://uk.tomy.com/sites/tomy_uk/files/content/en_GB/pokemon/splash/images/pokemon-logo.png');
+    background-position: center top;
+    background-repeat: no-repeat, repeat;
+}
+
+.form-signin {
+    max-width: 330px;
+    padding: 15px;
+    padding-top: 300px;
+    margin: 0 auto;
+}
+
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+    margin-bottom: 10px;
+}
+
+.form-signin .form-control {
+    position: relative;
+    height: auto;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+
+.form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+@media (min-width: 66em) {
+    .container {
+        max-width: 55rem;
+    }
+}
+
+.container-narrow > hr {
+    margin: 2rem 0;
+}
+
+#scrolable {
+}
+
+#media-r {
+    border: aliceblue;
+    border-style: groove;
+    border-radius: 5px;
+    padding: 13px;
+    margin-left: 81px;
+    color: black;
+    background-color: white;
+}
+
+#media-l {
+    border: #a6b529;
+    border-style: groove;
+    border-radius: 5px;
+    padding: 13px;
+    margin-right: 81px;
+    color: black;
+    background-color: white;
+}
+
+.modal-body {
+    padding: 19px;
+}
+
+#credentials {
+    margin-top: 12px;
+}
+
+#navbar {
+    margin-bottom: 13px;
+    margin-top: -31px;
+    margin-left: -180px;
+    margin-right: -180px;
+    border-radius: 7px;
+    background-color: #2e6db5;
+}
+
+#nav-input {
+    background-color: #669dce;
+}
+
+.text-center {
+    margin-top: -21px;
+    margin-bottom: 16px;
+}
+
+.navbar-fixed-bottom {
+    bottom: 30px;
+}

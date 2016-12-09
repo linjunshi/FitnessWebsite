@@ -1,0 +1,17 @@
+<div>
+  <form method="POST" class="form-group" action=""> {% csrf_token %}
+    <!-- <div class="row"> -->
+      <h2> Security </h2>
+    <!-- </div> -->
+    
+    <!-- password < 64 -->
+    <br>
+    <!-- <label class="profile">  -->
+    <h4>New Password 
+    <input name="password" type="password" pattern=".{4,}" title="Minimum 4 characters required" value=""> 
+    <!-- </label> -->
+		</h4>
+		<br>
+    <div> <button type="submit" name="submit" value="security"> Change </button> </div>
+  </form>
+</div>

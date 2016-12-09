@@ -1,0 +1,42 @@
+<div>
+	{% if have_plan == 'no' %}
+	<h2>You Have No Plan</h2>
+	<ul class="mid-button">
+    <button class="btn btn-default" style="position: left"><a href="/plan/">Create new plan</a></button>
+  </ul>
+	{% else %}
+  <h2>Your Current Plan</h2><br><br>
+  <h4>Target : {{ user.training_target }}</h4><br><br>
+  <h4>Recommendation :</h4><br>
+  <div class="container">
+  	<div class="row">
+  	    {% for i in videos %}
+        <div class="col-sm-4 col-md-3">
+          <div class="thumbnail">
+            <div class="embed-responsive embed-responsive-4by3">
+              <iframe class="embed-responsive-item" src="{{i.link}}" allowfullscreen></iframe>
+            </div>
+            <div class="caption">
+              <h4>{{ i.name }}</h4>
+            </div>
+            <div class="caption">
+              <a href="#" class="like">
+                <span id={{i.id}} class="glyphicon glyphicon-thumbs-up">{{i.likes}}</span>
+              </a>
+              <a href="#" class="dislike">
+                <span id={{i.id}} class="glyphicon glyphicon-thumbs-down">{{i.dislikes}}</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+    </div>
+    <form method="post" action="/profile/plan/">{% csrf_token %}
+	    <ul class="mid-button">
+	   		<button class="btn btn-default" style="position: left"><a href="/plan/">Change a plan</a></button>
+	   		<button name="cancel" type="submit" class="btn btn-default" style="position: left">Cancel plan</button>
+	  	</ul>
+  	</form>
+  </div>
+  {% endif %}
+</div>

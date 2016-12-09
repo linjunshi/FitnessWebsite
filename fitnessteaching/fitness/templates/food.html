@@ -1,0 +1,56 @@
+{% extends "common.html" %}
+
+{% block content %}
+    <div class="container-fluid">
+      <div class="row under-navbar">
+        <div class="col-sm-3 col-md-3 sidebar">
+          <div class="thumbnail">
+            <ul class="nav nav-sidebar">
+              {% if level == "main" %}
+              <li class="li-home"><a href="/"><span style="color: white">Home page</span></a></li>
+              {% elif level == "sub" %}
+              <li class="li-home"><a href="/food/"><span style="color: white">Back</span></a></li>
+              {% elif level == "search" %}
+              <li class="li-home"><a href="/search?keyword={{keyword}}&ndbno={{food_id}}"><span style="color: white">Back</span></a></li>
+              {% else %}
+              <li class="li-home"><a href="/food/{{level}}"><span style="color: white">Back</span></a></li>
+              {% endif %}
+
+              {% for item in foodGroups.list.item %}
+              {% if level == "main" %}
+              <li><a href="{{request.path}}{{item.id}}/">{{item.name}}</a></li>
+              {% elif level == "sub" %}
+              <li><a href="{{request.path}}{{item.ndbno}}/">{{item.name}}</a></li>
+              {% else %}
+              <li><a href="/food/{{level}}/{{item.ndbno}}">{{item.name}}</a></li>
+              {% endif %}
+              {% endfor %}            
+            </ul>
+          </div>
+        </div>
+        {% if level == "main" or level == "sub" %}
+        <div class="col-sm-3 col-md-9">
+          <div class="thumbnail food">
+            <img src="{{ STATIC_URL }}pic/food.jpg" alt="..." class="img-responsive">
+          </div>
+        </div>
+        {% else %}
+        <div class="col-sm-3 col-md-6 col-md-offset-1">
+          <h3>
+            {{foodDetail.report.food.name}}
+            <br>
+            {{foodDetail.report.food.fg}}
+            <br>
+          </h3>
+          <ul>
+            <table>
+            {% for item in foodDetail.report.food.nutrients %}
+              <tr> <th> {{item.name}} </th> <th> {{item.value}} {{item.unit}} </th> </tr>
+            {% endfor %}
+            </table>
+          </ul>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,40 @@
+<h2> {{friend.username}}'s Information </h2><br><br>
+{% load static %}
+<img src="{% static '' %}{{ friend.user_avatar_dir }}" width="200px" height="200px"/>
+
+<h4>
+	<div class="row">
+		<label class="col-xs-2"> First Name: </label>
+		<label class="col-xs-2"> {{friend.first_name}} </label>
+	</div>
+
+	<div class="row">
+		<label class="col-xs-2"> Last Name: </label>
+		<label class="col-xs-2"> {{friend.last_name}} </label>
+	</div>
+
+	<div class="row">
+		<label class="col-xs-2"> Email: </label>
+		<label class="col-xs-2"> {{friend.email}} </label>
+	</div>
+
+	<div class="row">
+		<label class="col-xs-2"> Age: </label>
+		<label class="col-xs-2"> {{friend.age}} </label>
+	</div>
+
+	<div class="row">
+		<label class="col-xs-2"> Gender: </label>
+		<label class="col-xs-2"> {{friend.gender}} </label>
+	</div>
+</h4>
+
+{% if ifFriend == "yes" %}
+	<h4> You and {{friend.username}} are already friends. </h4>
+{% elif ifFriend == "no" %}
+<form method="POST" class="form-group" onsubmit="return checkinput()" action=""> {% csrf_token %}
+	<button type="submit" name="submit" value="add"> Add friend </button>
+</form>
+{% endif %}
+<br><br>
+<ul class="mid-button"><button type="button" class="btn btn-default"><a href="../friend/">Back</a></button></ul>

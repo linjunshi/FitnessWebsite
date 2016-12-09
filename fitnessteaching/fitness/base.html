@@ -1,0 +1,63 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="{% static 'img/favicon.png' %}">
+    <title>Pokemon Chat | {{  request_user_email }}</title>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/base_style.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <script src="{% static 'scripts/http_ajax.googleapis.com_ajax_libs_jquery_1.12.4_jquery.js' %}"></script>
+</head>
+
+<body>
+<div class="container">
+    <nav class="navbar navbar-light bg-faded" id="navbar">
+        <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#navbar-header"
+                aria-controls="navbar-header">
+            &#9776;
+        </button>
+        <div class="collapse navbar-toggleable-xs" id="navbar-header">
+            <a class="navbar-brand" href="#"><img src="{% static 'img/pokeball.png' %}" height=30 width=41></a>
+            <form class="form-inline pull-xs-right" action="/logout/">
+                <button class="btn" type="reset"><a href="/reset/"><i class="fa fa-refresh" aria-hidden="true"></i> Reset messages</a></button>
+                <button class="btn" type="reset"><a href="//"><i class="fa fa-refresh" aria-hidden="true"></i> Back To Home</a></button>
+                <button class="btn bg-faded" type="submit"><i class="fa fa-sign-out" aria-hidden="true"></i>
+                </button>
+            </form>
+        </div>
+    </nav>
+</div>
+
+<div class="container">
+    <div class="row row-content">
+        <div class="col-xs-12" id="scrolable">
+            <ul class="media-list pre-scrollable" id="msg_list">
+                <!-- New messages will be posted here -->
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="navbar-fixed-bottom row-fluid">
+    <div class="container">
+        <form id="chat-form" method="post"> <!-- Form for sending ajax messages -->
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i><i class="fa fa-terminal fa-stack-1x fa-inverse"></i></span>
+                <input type="text" class="form-control" id="new_msg" name='new_msg'
+                       placeholder="Write your message here..." required>
+                <span class="input-group-btn">
+                    <button class="btn btn-warning" id="send_msg" type="submit"><i class="fa fa-paper-plane-o"
+                                                                                   aria-hidden="true"></i></button>
+                </span>
+            </div>
+        </form>
+    </div>
+</div>
+{{ room_num }}
+<script src="{% static 'scripts/main.js' %}"></script>
+</body>
+</html>

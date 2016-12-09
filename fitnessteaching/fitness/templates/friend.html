@@ -1,0 +1,26 @@
+<div class="row">
+
+	<div class="col-md-6">
+		<h2> Friends List </h2><br><br>
+		{% for my_friend in my_friends %}
+			<h4> <a href="../viewFriend/?id={{my_friend.friend2_id}}"> {{my_friend.friend2.username}} </a> </h4><br>
+		{% endfor %}
+	</div>
+
+	<div class="col-md-4 col-md-offset-2">
+		<h2> Search Friends </h2><br><br>
+		<form method="POST" class="form-group" onsubmit="return checkinput()" action=""> {% csrf_token %}
+			<label> <input type="text" name="friend"> </label>
+			<button type="submit" name="submit"> search friends </button>
+		</form>
+
+		{% if ifSearch == "yes" %}
+			<h3> Search results for user "{{keyword}}" </h3>
+			{% for friend in friends %}
+				<h3> <a href="../viewFriend/?id={{friend.id}}"> {{friend.username}} </a> </h3>
+			{% endfor %}
+		{% endif %}
+	</div>
+
+
+</div>

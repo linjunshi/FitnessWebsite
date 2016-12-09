@@ -1,0 +1,86 @@
+{% extends "common.html" %}
+
+{% block content %}
+
+<style type="text/css">
+  .under-the-bar{
+    margin-top: 50px;
+  }
+
+  #sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: 250px;
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: auto;
+    background: #f5f5f0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+  }
+
+  #profile-right-side{
+    padding: 10px 60px;
+  }
+
+  .profile-left-side-li{
+    font-size: 1.2em;
+    margin: 5px 0px;
+    padding: 2px 0px;
+  }
+</style>
+
+<div class="container-fluid under-the-bar">
+  <div class="row">
+    <div class="col-md-2">
+      <div id="sidebar-wrapper">
+        <ul class="nav nav-sidebar">
+          </br>
+          <li class="profile-left-side-li"> <a href="../account/"> Account information </a> </li>
+          <li class="profile-left-side-li"> <a href="../personal/"> Personal information </a> </li>
+          <li class="profile-left-side-li"> <a href="../plan/"> Manage your plan </a></li>
+          <li class="profile-left-side-li"> <a href="../friend/"> Friends </a></li>
+          <li class="profile-left-side-li"> <a href="../security/"> Security </a> </li>
+          <li class="profile-left-side-li"> <a href="/logout">Log out</a> </li>
+        </ul>
+      </div> <!-- sidebar-wrapper -->
+    </div> <!-- profile-left-side -->
+
+    <div class="col-md-9" id="profile-right-side">
+
+    <!-- account/ -->
+    {% if sub == 'account' %}
+      {% include "account_info.html" %}
+      
+    <!-- personal/ -->
+    {% elif sub == 'personal' %}
+      {% include "personal_info.html" %}
+      
+    <!-- plan -->
+    {% elif sub == 'plan' %}
+      {% include "personal_plan.html" %}
+
+    <!-- friends -->
+    {% elif sub == 'friend' %}
+      {% include "friend.html" %}
+
+    <!-- viewFriend -->
+    {% elif sub == 'view_friend' %}
+      {% include "view_friend.html" %}
+
+    <!-- security -->
+    {% elif sub == 'security' %}
+      {% include "security.html" %}
+      
+    {% else %}
+      <div class="row">
+        <img src=""/>
+      </div>
+    {% endif %}
+
+    </div>
+  </div>
+</div>
+{% endblock %}

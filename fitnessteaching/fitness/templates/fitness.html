@@ -1,0 +1,44 @@
+{% extends "common.html" %}
+  {% block bodytag %}
+  <body background="{{ STATIC_URL }}pic/fitness1.jpg" style="background-repeat: no-repeat; background-size: cover">
+  {% endblock %}
+  {% block content %}
+    {% if page == "category" %}
+    <div class="container-fluid">
+      <div class="row under-navbar">
+        <div class="col-sm-3 col-md-4 col-md-offset-7">
+          <div class="well">
+            <ul class="list-group">
+              {% for i in fitness_video_list %}
+
+              <li class="list-group-item"><a href="{{request.path}}{{i}}">{{ i }}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% elif page == "videos" %}
+    <div class="container">
+      <div class="row under-navbar">
+        {% for i in this_category_video_link_list %}
+        <div class="col-sm-4 col-md-3">
+          <div class="thumbnail">
+            <div class="embed-responsive embed-responsive-4by3">
+              <iframe class="embed-responsive-item" src="{{i.link}}" allowfullscreen></iframe>
+            </div>
+            <div class="caption">
+              <h4>{{ i.name }}</h4>
+            </div>
+            <div class="caption">
+                <span class="glyphicon glyphicon-thumbs-up">&nbsp;{{i.likes}}&nbsp;</span>
+                <span class="glyphicon glyphicon-thumbs-down">&nbsp;{{i.dislikes}}&nbsp;</span>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  {% endblock %}

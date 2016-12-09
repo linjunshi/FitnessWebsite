@@ -1,0 +1,160 @@
+<style type="text/css">
+#map{
+  height: 400px;
+}
+
+#location{
+  height: 120px;
+}
+</style>
+
+{% load static %}
+<div>
+  <h2> Account Information </h2><br>
+
+  <form method="POST" class="form-group" action="" enctype="multipart/form-data"> {% csrf_token %}
+    <!-- user_avatar_dir upload file -->
+    <div class="row">
+      <div class="col-md-6">
+        <img src="{% static '' %}{{ user.user_avatar_dir }}" width="200px" height="200px"/>
+        <!-- Select a new image to upload: -->
+        <input type="file" name="fileToUpload" id="fileToUpload">
+        Select a new image to upload
+      </div>
+    </div><br><br>
+
+        <!-- username len < 50 -->
+    <h4>Username
+      <input name="username" type="text" value="{{current_detail.username}}">
+    </h4><br>
+
+    <button type="submit" name="submit" value="account_username"> Change </button><br><br>
+
+    <div class="row">
+      <div class="col-md-6">
+        <h4>You have signed in {{user.attendence}} days</h4>
+        <h4> {{attendence}} </h4>
+        <!-- {{ user_total }} -->
+        <button type="submit" name="submit" value="account_attendence"> Daily sign up </button>
+      </div>
+    </div><br><br>
+
+    <!-- last_location_lat cannot change -->
+    <!-- last_location_long cannot change -->
+    <h2> Your Location </h2><br>
+
+    <div id="location" class="row">
+      <h4 class="col-md-12"> Last location: </h4>
+      <div class="col-md-6"> latitude &nbsp;
+        {{current_detail.last_location_lat}}
+      </div>
+      <div class="col-md-6"> longitude &nbsp;
+        {{current_detail.last_location_long}}
+      </div>
+      <h4 class="col-md-12"> Current location: </h4>
+      <div class="col-md-6"> latitude &nbsp; <input type="text" id="latitude" name="last_location_lat" value="{{current_detail.last_location_lat}}"/> </div>
+      <br/>
+      <div class="col-md-6"> longitutde &nbsp; <input type="text" id="longitude" name="last_location_long" value="{{current_detail.last_location_long}}"/> </div>
+    </div>
+
+    <button type="submit" name="submit" value="account_location"> Change to Current Location </button>
+  </form> <!-- form group -->
+
+  <div id="map">
+
+  </div>
+</div>
+
+<script type="text/javascript">
+    var map;
+    var pos_lat;
+    var pos_lng;
+    var markers = [];
+
+    function showPosition(position) {
+        pos_lat = position.coords.latitude;
+        pos_lng = position.coords.longitude;
+        //alert(position.coords.longitude);
+
+        var user_total = new Array();
+        var i = 0;
+
+        {% for user in user_total %}
+          user_total[i] = {title: "{{user.username}}", location: {lat: parseFloat("{{user.last_location_lat}}"), lng: parseFloat("{{user.last_location_long}}")}, id: "{{user.id}}"};
+          i += 1;
+        {% endfor %}
+
+        map = new google.maps.Map(document.getElementById('map'), {
+                           center: {lat: position.coords.latitude, lng: position.coords.longitude},
+                           zoom: 13,
+            });
+
+        var largeInfowindow = new google.maps.InfoWindow();
+
+        // var tribeca = {lat: position.coords.latitude, lng: position.coords.longitude};
+        // var marker = new google.maps.Marker({
+        //                 position: tribeca,
+        //                 map: map,
+        //                 title: 'Your Location!~'
+        //     });
+        // markers.push(marker);
+        // marker.addListener('click', function() {
+        //   largeInfowindow.open(map, marker);
+        // });
+
+        for (i = 0;i < user_total.length;i ++) {
+          var position = user_total[i].location;
+          var title = user_total[i].title;
+          var id = user_total[i].id;
+
+          //alert(user_total.length);
+
+
+          var marker = new google.maps.Marker({
+            map: map,
+            position: position,
+            title: title,
+            animation: google.maps.Animation.DROP,
+            id: id
+          });
+
+          markers.push(marker);
+          //alert(position.lat);
+
+
+          marker.addListener('click', function() {
+            populateInfoWindow(this, largeInfowindow);
+          });
+
+        }
+
+        function populateInfoWindow(marker, infowindow) {
+          if (infowindow.marker != marker) {
+            infowindow.marker = marker;
+            infowindow.setContent('<a href="../viewFriend/?id=' + marker.id + '">' + marker.title + '</a>');
+            infowindow.open(map, marker);
+            infowindow.addListener('closeclick', function(){
+              infowindow.setMarker(null);
+            });
+          }
+        }
+
+
+        document.getElementById("latitude").setAttribute("value", pos_lat);
+        document.getElementById("longitude").setAttribute("value", pos_lng);
+
+        //for (var i = 0; i < {{user_total}}.length;i ++) {
+        //alert(markers[2]);
+        //}
+        //alert(pos_lat);
+        //alert("yes");
+    }
+
+    function initMap(){
+        // Constructor creates a new map - only center and zoom are required
+        navigator.geolocation.getCurrentPosition(showPosition);
+
+    }
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCE2xyFZjXhl-FxlnZDDqFCRXo5XjRSPG8&v=3&callback=initMap">
+</script>

@@ -1,0 +1,95 @@
+{% with STATIC_URL='http://cs4920.jwang.id.au/static/fitness/' %}
+<!DOCTYPE html>
+<!-- TO-DO: delete everything related to unused sign in form -->
+<html lang="en">
+    {% load static %}
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}Fitness Teaching{% endblock %}</title>
+
+    <!-- Bootstrap and CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="{% static 'fitness/css/thumbnail.css' %}" rel="stylesheet" />
+    <link href="{% static 'fitness/css/img.css' %}" rel="stylesheet" />
+    <link href="{% static 'fitness/css/tagBackground.css' %}" rel="stylesheet" />
+    <link href="{% static 'fitness/css/marginTop.css' %}" rel="stylesheet" />
+    <link href="{% static 'fitness/css/brandBackground.css' %}" rel="stylesheet" />
+    <style type="text/css"></style><!--delete it later-->
+
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{% static 'fitness/SignInSignUp_css/normalize.css' %}">
+    <!-- <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css"> -->
+    <link rel="stylesheet" href="{% static 'fitness/SignInSignUp_css/style.css' %}">
+
+  </head>
+
+  {% block bodytag %}
+  <body>
+  {% endblock %}
+    {% block nav %}
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">{% block brand %}{% endblock %}</a>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/">Home page</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="/food/">Food category</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="/fitness/category/">Fitness list</a></li>
+              </ul>
+            </li>
+            {% if request.session.signed_in %}
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Your Own Plan<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/profile/plan">Own Plan</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="/plan/">New Plan</a></li>
+              </ul>
+            </li>
+            {% endif %}
+
+            {% if request.session.signed_in %}
+              <li><a href="/homepage/"> Chat </a></li>
+            {% endif %}
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/blah">About us</a></li>
+            {% if not request.session.signed_in %}
+                <li><a href="/register">Sign In/Up</a></li>
+            {% else %}
+                <li><a href="/profile/account">{{ request.session.username }}</a></li>
+            {% endif %}
+          </ul>
+          <form class="navbar-form navbar-right" method="GET" action="/search">
+            <div class="form-group">
+              <input type="text" name="keyword" class="form-control" placeholder="Search">
+            </div>
+          </form>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+    {% endblock %}
+
+    {% block content %}{% endblock %}
+
+    {% block footer %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <!-- <script src="{{ STATIC_URL }}css/index.js"></script> -->
+    <script src="{% static 'fitness/SignInSignUp_js/index.js' %}"></script>
+    {% endblock %}
+  </body>
+</html>
+{% endwith %}
